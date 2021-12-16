@@ -45,6 +45,23 @@ public class PreGame extends AppCompatActivity {
 
             }
         });
+        switchX5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(switchX4.isChecked()){
+                    switchX4.setChecked(false);
+                }
+            }
+        });
+
+        switchX4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(switchX5.isChecked()){
+                    switchX5.setChecked(false);
+                }
+            }
+        });
 
     }
 

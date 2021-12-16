@@ -130,7 +130,7 @@ public class Board extends AppCompatActivity {
                             }
                         }
                     } else if(!isWinner){
-                        for(int i = 0; i < 3; i++){
+                        /*for(int i = 0; i < 3; i++){
                             for(int j = 0; j<3; j++){
                                 if(!buttons[i][j].getText().toString().isEmpty()){
                                     filledSpaces++;
@@ -139,7 +139,7 @@ public class Board extends AppCompatActivity {
                                     }
                                 }
                             }
-                        }
+                        }*/
                 }
                     xTurn = true;
 

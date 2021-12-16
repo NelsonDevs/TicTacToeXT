@@ -34,6 +34,7 @@ public class PreGame extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(playerTwo.getHint().toString().equals("")){
                     playerTwo.setHint("CPU PLAYING!");
+                    playerTwo.setText("CPU");
                 } else {
                     playerTwo.setHint("Enter your names.");
                 }
@@ -41,13 +42,6 @@ public class PreGame extends AppCompatActivity {
             }
         });
 
-        /*if (playerOne.getText().toString().equals("") || playerTwo.getText().toString().equals("")) {
-            startButton.setClickable(false);
-        }
-        if (!playerOne.getText().toString().equals("") || !playerTwo.getText().toString().equals(""))
-        {
-            startButton.setClickable(true);
-        } */
     }
 
     public void startGame(View view){
@@ -57,6 +51,7 @@ public class PreGame extends AppCompatActivity {
         if(_switch.isChecked()){
             p2 = "CPU";
             playerTwo.setHint("CPU PLAYING!");
+            playerTwo.setText("CPU");
         }
         else {
             p2 = playerTwo.getText().toString();

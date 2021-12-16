@@ -9,11 +9,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Board extends AppCompatActivity {
 
     private TextView playerOneName;
     private TextView playerTwoName;
     private final Button[][] buttons = new Button[3][3];
+    private final ArrayList<Button> catButtons = new ArrayList<Button>();
 
     private String playerOne;
     private String playerTwo;
@@ -27,15 +31,14 @@ public class Board extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
-       Intent intent = getIntent();
+        Intent intent = getIntent();
 
-       playerOne = intent.getStringExtra("playerOne");
-       playerTwo = intent.getStringExtra("playerTwo");
+        playerOne = intent.getStringExtra("playerOne");
+        playerTwo = intent.getStringExtra("playerTwo");
 
-       if(playerTwo.equals("CPU")){
-           CPU = true;
-       }
-
+        if (playerTwo.equals("CPU")) {
+            CPU = true;
+        }
 
 
         playerOneName = findViewById(R.id.playerOneName);
@@ -55,7 +58,7 @@ public class Board extends AppCompatActivity {
         Button btnEight = findViewById(R.id.button_8);
         Button btnNine = findViewById(R.id.button_9);
 
-        buttons[0][0]= btnOne;
+        buttons[0][0] = btnOne;
         buttons[0][1] = btnTwo;
         buttons[0][2] = btnThree;
         buttons[1][0] = btnFour;
@@ -67,49 +70,40 @@ public class Board extends AppCompatActivity {
 
     }
 
-    public void clickButton(View v){
+    public void clickButton(View v) {
         Button btn = findViewById(v.getId());
 
-        if(btn.getText() != "X" && btn.getText() != "O"){
-            if(xTurn == true){
+        if (btn.getText() != "X" && btn.getText() != "O") {
+            if (xTurn == true) {
                 btn.setText("X");
-                for(int i = 0; i < buttons.length; i++){
-                    for(int j = 0; j<buttons[i].length; j++){
-                        if(btn == buttons[i][j]){
-                        buttons[i][j].setText("X");
-                        buttons[i][j].setAllCaps(true);
+                for (int i = 0; i < buttons.length; i++) {
+                    for (int j = 0; j < buttons[i].length; j++) {
+                        if (btn == buttons[i][j]) {
+                            buttons[i][j].setText("X");
+                            buttons[i][j].setAllCaps(true);
                         }
                     }
                 }
                 winner = checkWinner(buttons);
-                if(isWinner){
+                if (isWinner) {
                     announceWinner(winner);
-                    //Toast.makeText(this,"The "+ winner +"s Win!", Toast.LENGTH_LONG).show();
-                    for(int i = 0; i < buttons.length; i++){
-                        for(int j = 0; j<buttons[i].length; j++){
-                            if(btn == buttons[i][j]){
+                    for (int i = 0; i < buttons.length; i++) {
+                        for (int j = 0; j < buttons[i].length; j++) {
+                            if (btn == buttons[i][j]) {
                                 buttons[i][j].setClickable(false);
                             }
                         }
                     }
+                } else if (!isWinner) {
+                    checkCAT();
                 }
-                else if(!isWinner){
-                    /*for(int i = 0; i < 3; i++){
-                        for(int j = 0; j<3; j++){
-                            if(!buttons[i][j].getText().toString().isEmpty()){
-                                filledSpaces++;
-                                if(filledSpaces == 9){
-                                    announceWinner("CAT! It's a Tie!");
-                                }
-                            }
-                        }
-                    } */
-                }
+
                 xTurn = false;
                 if(CPU){
-                    return;
+                    cpuPlay();
                 }
-            } else if (!xTurn){
+
+            } else if (!xTurn) {
                     btn.setText("O");
                     for (int i = 0; i < buttons.length; i++) {
                         for (int j = 0; j < buttons[i].length; j++) {
@@ -120,39 +114,55 @@ public class Board extends AppCompatActivity {
                         }
                     }
                     winner = checkWinner(buttons);
-                    if(isWinner){
+                    if (isWinner) {
                         announceWinner(winner);
                         //Toast.makeText(this,"The "+ winner +"s Win!", Toast.LENGTH_LONG).show();
-                        for(int i = 0; i < buttons.length; i++){
-                            for(int j = 0; j<buttons[i].length; j++){
+                        for (int i = 0; i < buttons.length; i++) {
+                            for (int j = 0; j < buttons[i].length; j++) {
                                 buttons[i][j].setClickable(false);
                             }
                         }
-                    } else if(!isWinner){
-                        /*for(int i = 0; i < 3; i++){
-                            for(int j = 0; j<3; j++){
-                                if(!buttons[i][j].getText().toString().isEmpty()){
-                                    filledSpaces++;
-                                    if(filledSpaces == 9){
-                                        announceWinner("CAT! It's a Tie!");
-                                    }
-                                }
-                            }
-                        }*/
-                }
-                    xTurn = true;
-
+                    } else if (!isWinner) {
+                        checkCAT();
+                    }
+                xTurn = true;
             }
         }
-        if (btn.getText() == "X"|| btn.getText() == "O" ){
-            return; //btn.setClickable(false);
+        if (btn.getText() == "X" || btn.getText() == "O") {
+            return;
         }
 
 
     }
-    public void rematch(){
-        for(int i = 0; i < buttons.length; i++){
-            for(int j = 0; j<buttons[i].length; j++){
+    public void cpuPlay() {
+        boolean cpuPlayed = false;
+        while (!cpuPlayed  && !isWinner) {
+            Random randIndex = new Random();
+            int x = randIndex.nextInt(3);
+            int y = randIndex.nextInt(3);
+
+            if (buttons[x][y].getText().toString().isEmpty()) {
+                buttons[x][y].setText("O");
+                cpuPlayed= true;
+            }
+        }
+        winner = checkWinner(buttons);
+        if (isWinner) {
+            announceWinner(winner);
+            for (int i = 0; i < buttons.length; i++) {
+                for (int j = 0; j < buttons[i].length; j++) {
+                    buttons[i][j].setClickable(false);
+                }
+            }
+        } else if (!isWinner) {
+            checkCAT();
+        }
+
+        xTurn = true;
+    }
+    public void rematch() {
+        for (int i = 0; i < buttons.length; i++) {
+            for (int j = 0; j < buttons[i].length; j++) {
                 buttons[i][j].setClickable(true);
                 buttons[i][j].setText("");
 
@@ -161,131 +171,74 @@ public class Board extends AppCompatActivity {
         filledSpaces = 0;
         winner = "";
         isWinner = false;
+        catButtons.clear();
 
     }
-    public void announceWinner(String w){
-        WinningDialog winDialog = new WinningDialog(this, w + "wins!", this);
+
+    public void checkCAT() {
+        if(!isWinner){
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (!buttons[i][j].getText().toString().isEmpty()) {
+                        if (!catButtons.contains(buttons[i][j])) {
+                            catButtons.add(buttons[i][j]);
+                            filledSpaces++;
+                            Log.d("FilledSpaces", String.valueOf(filledSpaces));
+                            if (filledSpaces == 9) {
+                                announceWinner("CAT! It's a Tie!");
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    public void announceWinner(String w) {
+        WinningDialog winDialog = new WinningDialog(this, w + " wins!", this);
         winDialog.setCancelable(true);
         winDialog.show();
     }
-    public boolean equals(Button a,Button b,Button c){
+
+    public boolean equals(Button a, Button b, Button c) {
         String a_ = a.getText().toString();
-        Log.d("A", a_);
         String b_ = b.getText().toString();
-        Log.d("B", b_);
         String c_ = c.getText().toString();
-        Log.d("C",c_);
 
-
-        if (a_ == b_ && b_ == c_ && !a_.isEmpty()){
-            return true;
-        } else {
-            return false;
-        }
+        return a_ == b_ && b_ == c_ && !a_.isEmpty();
     }
-    public String checkWinner(Button[][] btnArray){
+
+    public String checkWinner(Button[][] btnArray) {
 
 
-        for(int i = 0; i < 3; i++){
-            if(equals(btnArray[i][0],btnArray[i][1],btnArray[i][2])){
+        for (int i = 0; i < 3; i++) {
+            if (equals(btnArray[i][0], btnArray[i][1], btnArray[i][2])) {
                 isWinner = true;
-                Log.d("HERE GOES One:", String.valueOf(i));
                 return btnArray[i][0].getText().toString();
             }
         }
 
-        for(int i = 0; i < 3; i++){
-            if(equals(btnArray[0][i],btnArray[1][i],btnArray[2][i])){
+        for (int i = 0; i < 3; i++) {
+            if (equals(btnArray[0][i], btnArray[1][i], btnArray[2][i])) {
                 isWinner = true;
-                Log.d("HERE GOES Two:", String.valueOf(i));
                 return btnArray[0][i].getText().toString();
             }
         }
 
-        /*/ O Wins
-        if(btnArray[0][0].getText().toString() == "O" && btnArray[0][1].getText().toString() == "O" && btnArray[0][2].getText().toString() == "O"){
+        if (equals(btnArray[0][0], btnArray[1][1], btnArray[2][2])) {
             isWinner = true;
-            return "O";
+            return btnArray[0][0].getText().toString();
         }
 
-         else if(btnArray[0][0].getText().toString() == "O" && btnArray[1][1].getText().toString() == "O" && btnArray[2][2].getText().toString() == "O"){
+        if (equals(btnArray[2][0], btnArray[1][1], btnArray[0][2])) {
             isWinner = true;
-            return "O";
-        }
-
-        else if(btnArray[2][0].getText().toString() == "O" && btnArray[1][1].getText().toString() == "O" && btnArray[0][2].getText().toString() == "O"){
-            isWinner = true;
-            return "O";
-        }
-
-        else if(btnArray[1][0].getText().toString() == "O" && btnArray[1][1].getText().toString() == "O" && btnArray[1][2].getText().toString() == "O"){
-            isWinner = true;
-            return "O";
-        }
-
-        else if(btnArray[2][0].getText().toString() == "O" && btnArray[2][1].getText().toString() == "O" && btnArray[2][2].getText().toString() == "O"){
-            isWinner = true;
-            return "O";
-        }
-
-        else  if(btnArray[0][0].getText().toString() == "O" && btnArray[1][0].getText().toString() == "O" && btnArray[2][0].getText().toString() == "O"){
-            isWinner = true;
-            return "O";
-        }
-
-        else if(btnArray[0][1].getText().toString() == "O" && btnArray[1][1].getText().toString() == "O" && btnArray[2][1].getText().toString() == "O"){
-            isWinner = true;
-            return "O";
-        }
-
-        else if(btnArray[0][2].getText().toString() == "O" && btnArray[1][2].getText().toString() == "O" && btnArray[2][2].getText().toString() == "O"){
-            isWinner = true;
-            return "O";
+            return btnArray[2][0].getText().toString();
         }
 
 
-        // X Wins
-       else  if(btnArray[0][0].getText().toString() == "X" && btnArray[0][1].getText().toString() == "X" && btnArray[0][2].getText().toString() == "X"){
-            isWinner = true;
-            return "X";
-        }
-
-        else if(btnArray[0][0].getText().toString() == "X" && btnArray[1][1].getText().toString() == "X" && btnArray[2][2].getText().toString() == "X"){
-            isWinner = true;
-            return "X";
-        }
-
-        else if(btnArray[2][0].getText().toString() == "X" && btnArray[1][1].getText().toString() == "X" && btnArray[0][2].getText().toString() == "X"){
-            isWinner = true;
-            return "X";
-        }
-
-        else if(btnArray[1][0].getText().toString() == "X" && btnArray[1][1].getText().toString() == "X" && btnArray[1][2].getText().toString() == "X"){
-            isWinner = true;
-            return "X";
-        }
-
-        else if(btnArray[2][0].getText().toString() == "X" && btnArray[2][1].getText().toString() == "X" && btnArray[2][2].getText().toString() == "X"){
-            isWinner = true;
-            return "X";
-        }
-
-        else if(btnArray[0][0].getText().toString() == "X" && btnArray[1][0].getText().toString() == "X" && btnArray[2][0].getText().toString() == "X"){
-            isWinner = true;
-            return "X";
-        }
-
-        else if(btnArray[0][1].getText().toString() == "X" && btnArray[1][1].getText().toString() == "X" && btnArray[2][1].getText().toString() == "X"){
-            isWinner = true;
-            return "X";
-        }
-
-        else if(btnArray[0][2].getText().toString() == "O" && btnArray[1][2].getText().toString() == "X" && btnArray[2][2].getText().toString() == "X"){
-            isWinner = true;
-            return "X";
-        }
-
-          //   */
         return "";
     }
 

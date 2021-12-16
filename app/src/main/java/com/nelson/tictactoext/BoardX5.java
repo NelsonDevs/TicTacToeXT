@@ -78,27 +78,27 @@ public class BoardX5 extends AppCompatActivity{
         buttons[0][1] = btnTwo;
         buttons[0][2] = btnThree;
         buttons[0][3] = btnFour;
-        buttons[0][0] = btnFive;
-        buttons[1][1] = btnSix;
-        buttons[1][2] = btnSeven;
-        buttons[1][3] = btnEight;
-        buttons[1][0] = btnNine;
-        buttons[1][1] = btnten;
-        buttons[2][2] = btnEleven;
-        buttons[2][3] = btnTwelve;
-        buttons[2][0] = btnThirteen;
-        buttons[2][1] = btnFourteen;
-        buttons[2][2] = btnFifteen;
-        buttons[3][3] = btnSixteen;
-        buttons[3][3] = btnSeventeen;
-        buttons[3][3] = btnEighteen;
+        buttons[0][4] = btnFive;
+        buttons[1][0] = btnSix;
+        buttons[1][1] = btnSeven;
+        buttons[1][2] = btnEight;
+        buttons[1][3] = btnNine;
+        buttons[1][4] = btnten;
+        buttons[2][0] = btnEleven;
+        buttons[2][1] = btnTwelve;
+        buttons[2][2] = btnThirteen;
+        buttons[2][3] = btnFourteen;
+        buttons[2][4] = btnFifteen;
+        buttons[3][0]= btnSixteen;
+        buttons[3][1] = btnSeventeen;
+        buttons[3][2] = btnEighteen;
         buttons[3][3] = btnNineteen;
-        buttons[3][3] = btnTwenty;
-        buttons[4][3] = btnTwentyOne;
-        buttons[4][3] = btnTwentyTwo;
-        buttons[4][3] = btnTwentyThree;
+        buttons[3][4] = btnTwenty;
+        buttons[4][0] = btnTwentyOne;
+        buttons[4][1] = btnTwentyTwo;
+        buttons[4][2] = btnTwentyThree;
         buttons[4][3] = btnTwentyFour;
-        buttons[4][3] = btnTwentyFive;
+        buttons[4][4] = btnTwentyFive;
 
     }
 
@@ -148,7 +148,6 @@ public class BoardX5 extends AppCompatActivity{
                 winner = checkWinner(buttons);
                 if (isWinner) {
                     announceWinner(winner);
-                    //Toast.makeText(this,"The "+ winner +"s Win!", Toast.LENGTH_LONG).show();
                     for (int i = 0; i < buttons.length; i++) {
                         for (int j = 0; j < buttons[i].length; j++) {
                             buttons[i][j].setClickable(false);
@@ -170,8 +169,8 @@ public class BoardX5 extends AppCompatActivity{
         boolean cpuPlayed = false;
         while (!cpuPlayed  && !isWinner) {
             Random randIndex = new Random();
-            int x = randIndex.nextInt(4);
-            int y = randIndex.nextInt(4);
+            int x = randIndex.nextInt(5);
+            int y = randIndex.nextInt(5);
 
             if (buttons[x][y].getText().toString().isEmpty()) {
                 buttons[x][y].setText("O");
@@ -248,14 +247,14 @@ public class BoardX5 extends AppCompatActivity{
     public String checkWinner(Button[][] btnArray) {
 
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             if (equals(btnArray[i][0], btnArray[i][1], btnArray[i][2],btnArray[i][3], btnArray[i][4])) {
                 isWinner = true;
                 return btnArray[i][0].getText().toString();
             }
         }
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             if (equals(btnArray[0][i], btnArray[1][i], btnArray[2][i], btnArray[3][i], btnArray[4][i])) {
                 isWinner = true;
                 return btnArray[0][i].getText().toString();

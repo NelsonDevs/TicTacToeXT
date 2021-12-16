@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -95,7 +94,7 @@ public class Board extends AppCompatActivity {
                     }
                 }
                 else if(!isWinner){
-                    for(int i = 0; i < 3; i++){
+                    /*for(int i = 0; i < 3; i++){
                         for(int j = 0; j<3; j++){
                             if(!buttons[i][j].getText().toString().isEmpty()){
                                 filledSpaces++;
@@ -104,7 +103,7 @@ public class Board extends AppCompatActivity {
                                 }
                             }
                         }
-                    }
+                    } */
                 }
                 xTurn = false;
                 if(CPU){
@@ -165,23 +164,32 @@ public class Board extends AppCompatActivity {
 
     }
     public void announceWinner(String w){
-        WinningDialog winDialog = new WinningDialog(this, w, this);
+        WinningDialog winDialog = new WinningDialog(this, w + "wins!", this);
         winDialog.setCancelable(true);
         winDialog.show();
     }
     public boolean equals(Button a,Button b,Button c){
-        if (a.getText().toString().equals(b.getText().toString()) && a.getText().toString().equals(c.getText().toString()) ){
+        String a_ = a.getText().toString();
+        Log.d("A", a_);
+        String b_ = b.getText().toString();
+        Log.d("B", b_);
+        String c_ = c.getText().toString();
+        Log.d("C",c_);
+
+
+        if (a_ == b_ && b_ == c_ && !a_.isEmpty()){
             return true;
-        } else{
+        } else {
             return false;
         }
     }
     public String checkWinner(Button[][] btnArray){
 
-        /*
+
         for(int i = 0; i < 3; i++){
-            if(equals(btnArray[i][0],btnArray[i][1],btnArray[i][2]) == true ){
+            if(equals(btnArray[i][0],btnArray[i][1],btnArray[i][2])){
                 isWinner = true;
+                Log.d("HERE GOES One:", String.valueOf(i));
                 return btnArray[i][0].getText().toString();
             }
         }
@@ -189,11 +197,12 @@ public class Board extends AppCompatActivity {
         for(int i = 0; i < 3; i++){
             if(equals(btnArray[0][i],btnArray[1][i],btnArray[2][i])){
                 isWinner = true;
+                Log.d("HERE GOES Two:", String.valueOf(i));
                 return btnArray[0][i].getText().toString();
             }
-        } */
+        }
 
-        // O Wins
+        /*/ O Wins
         if(btnArray[0][0].getText().toString() == "O" && btnArray[0][1].getText().toString() == "O" && btnArray[0][2].getText().toString() == "O"){
             isWinner = true;
             return "O";

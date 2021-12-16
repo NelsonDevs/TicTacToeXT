@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TicTacToeXT">
         <activity
+            android:name=".BoardX5"
+            android:exported="false" />
+        <activity
+            android:name=".BoardX4"
+            android:exported="false" />
+        <activity
             android:name=".Board"
             android:exported="true" />
         <activity

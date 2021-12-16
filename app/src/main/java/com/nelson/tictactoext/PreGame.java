@@ -17,6 +17,8 @@ public class PreGame extends AppCompatActivity {
     private EditText playerTwo;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch _switch;
+    private Switch switchX4;
+    private Switch switchX5;
     private Button startButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,8 @@ public class PreGame extends AppCompatActivity {
         startButton = findViewById(R.id.startButton);
 
         _switch = findViewById(R.id.switch1);
+        switchX4 = findViewById(R.id.boardx4);
+        switchX5 = findViewById(R.id.boardx5);
 
         _switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -36,7 +40,7 @@ public class PreGame extends AppCompatActivity {
                     playerTwo.setHint("CPU PLAYING!");
                     playerTwo.setText("CPU");
                 } else {
-                    playerTwo.setHint("Enter your names.");
+                    playerTwo.setHint("Enter your name.");
                 }
 
             }
@@ -56,10 +60,26 @@ public class PreGame extends AppCompatActivity {
         else {
             p2 = playerTwo.getText().toString();
         }
+
         if (playerOne.getText().toString().equals("") || playerTwo.getText().toString().equals("")) {
             Toast.makeText(this,"Please pick a name for both boxes", Toast.LENGTH_SHORT).show();
-        } else {
-            Intent intent = new Intent(this, Board.class);
+            return;
+        }
+
+       /* if (switchX4.isChecked()){
+            Intent intent = new Intent(this, BoardX4.class);
+            intent.putExtra("playerOne", p1);
+            intent.putExtra("playerTwo", p2);
+            startActivity(intent);
+        } */
+        /*if(switchX5.isChecked()){
+            Intent intent = new Intent(this, BoardX5.class);
+            intent.putExtra("playerOne", p1);
+            intent.putExtra("playerTwo", p2);
+            startActivity(intent);
+        } */
+        else {
+            Intent intent = new Intent(this, BoardX4.class);
             intent.putExtra("playerOne", p1);
             intent.putExtra("playerTwo", p2);
             startActivity(intent);

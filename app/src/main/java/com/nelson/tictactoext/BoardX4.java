@@ -16,7 +16,7 @@ public class BoardX4 extends AppCompatActivity {
 
     private TextView playerOneName;
     private TextView playerTwoName;
-    private final Button[][] buttons = new Button[3][3];
+    private final Button[][] buttons = new Button[4][4];
     private final ArrayList<Button> catButtons = new ArrayList<Button>();
 
     private String playerOne;
@@ -152,8 +152,8 @@ public class BoardX4 extends AppCompatActivity {
         boolean cpuPlayed = false;
         while (!cpuPlayed  && !isWinner) {
             Random randIndex = new Random();
-            int x = randIndex.nextInt(3);
-            int y = randIndex.nextInt(3);
+            int x = randIndex.nextInt(4);
+            int y = randIndex.nextInt(4);
 
             if (buttons[x][y].getText().toString().isEmpty()) {
                 buttons[x][y].setText("O");
@@ -191,14 +191,14 @@ public class BoardX4 extends AppCompatActivity {
 
     public void checkCAT() {
         if(!isWinner){
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
                     if (!buttons[i][j].getText().toString().isEmpty()) {
                         if (!catButtons.contains(buttons[i][j])) {
                             catButtons.add(buttons[i][j]);
                             filledSpaces++;
                             Log.d("FilledSpaces", String.valueOf(filledSpaces));
-                            if (filledSpaces == 9) {
+                            if (filledSpaces == 16) {
                                 announceWinner("CAT! It's a Tie!");
                             }
                         }

@@ -63,15 +63,14 @@ public class PreGame extends AppCompatActivity {
 
         if (playerOne.getText().toString().equals("") || playerTwo.getText().toString().equals("")) {
             Toast.makeText(this,"Please pick a name for both boxes", Toast.LENGTH_SHORT).show();
-            return;
         }
 
-       /* if (switchX4.isChecked()){
+        if (switchX4.isChecked()){
             Intent intent = new Intent(this, BoardX4.class);
             intent.putExtra("playerOne", p1);
             intent.putExtra("playerTwo", p2);
             startActivity(intent);
-        } */
+        }
         /*if(switchX5.isChecked()){
             Intent intent = new Intent(this, BoardX5.class);
             intent.putExtra("playerOne", p1);
@@ -79,7 +78,7 @@ public class PreGame extends AppCompatActivity {
             startActivity(intent);
         } */
         else {
-            Intent intent = new Intent(this, BoardX4.class);
+            Intent intent = new Intent(this, Board.class);
             intent.putExtra("playerOne", p1);
             intent.putExtra("playerTwo", p2);
             startActivity(intent);

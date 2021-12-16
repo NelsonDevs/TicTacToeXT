@@ -71,12 +71,12 @@ public class PreGame extends AppCompatActivity {
             intent.putExtra("playerTwo", p2);
             startActivity(intent);
         }
-        /*if(switchX5.isChecked()){
+        if(switchX5.isChecked()){
             Intent intent = new Intent(this, BoardX5.class);
             intent.putExtra("playerOne", p1);
             intent.putExtra("playerTwo", p2);
             startActivity(intent);
-        } */
+        }
         else {
             Intent intent = new Intent(this, Board.class);
             intent.putExtra("playerOne", p1);

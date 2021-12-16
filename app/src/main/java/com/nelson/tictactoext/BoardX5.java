@@ -64,15 +64,15 @@ public class BoardX5 extends AppCompatActivity{
         Button btnFourteen = findViewById(R.id.button_14);
         Button btnFifteen = findViewById(R.id.button_15);
         Button btnSixteen = findViewById(R.id.button_16);
-        Button ButtonbtnSeventeen =findViewById(R.id.button_17);
-        Button BUttonbtnEightteen = findViewById(R.id.button_18);
+        Button btnSeventeen =findViewById(R.id.button_17);
+        Button btnEighteen = findViewById(R.id.button_18);
         Button btnNineteen = findViewById(R.id.button_19);
         Button btnTwenty = findViewById(R.id.button_20);
         Button btnTwentyOne = findViewById(R.id.button_21);
         Button btnTwentyTwo = findViewById(R.id.button_22);
         Button btnTwentyThree = findViewById(R.id.button_23);
-        Button btnTwentyFour = findViewById(R.id.button_24)
-        Button btnTwentyFive = findViewById(R.id.button_25)
+        Button btnTwentyFour = findViewById(R.id.button_24);
+        Button btnTwentyFive = findViewById(R.id.button_25);
 
         buttons[0][0] = btnOne;
         buttons[0][1] = btnTwo;
@@ -91,7 +91,7 @@ public class BoardX5 extends AppCompatActivity{
         buttons[2][2] = btnFifteen;
         buttons[3][3] = btnSixteen;
         buttons[3][3] = btnSeventeen;
-        buttons[3][3] = btnEightteen;
+        buttons[3][3] = btnEighteen;
         buttons[3][3] = btnNineteen;
         buttons[3][3] = btnTwenty;
         buttons[4][3] = btnTwentyOne;

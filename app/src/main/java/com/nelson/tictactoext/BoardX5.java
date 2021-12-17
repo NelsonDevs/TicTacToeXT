@@ -57,7 +57,7 @@ public class BoardX5 extends AppCompatActivity{
         Button btnSeven = findViewById(R.id.button_7);
         Button btnEight = findViewById(R.id.button_8);
         Button btnNine = findViewById(R.id.button_9);
-        Button btnten = findViewById(R.id.button_10);
+        Button btnTen = findViewById(R.id.button_10);
         Button btnEleven = findViewById(R.id.button_11);
         Button btnTwelve = findViewById(R.id.button_12);
         Button btnThirteen = findViewById(R.id.button_13);
@@ -83,7 +83,7 @@ public class BoardX5 extends AppCompatActivity{
         buttons[1][1] = btnSeven;
         buttons[1][2] = btnEight;
         buttons[1][3] = btnNine;
-        buttons[1][4] = btnten;
+        buttons[1][4] = btnTen;
         buttons[2][0] = btnEleven;
         buttons[2][1] = btnTwelve;
         buttons[2][2] = btnThirteen;

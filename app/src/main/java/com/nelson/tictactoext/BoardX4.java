@@ -130,7 +130,6 @@ public class BoardX4 extends AppCompatActivity {
                 winner = checkWinner(buttons);
                 if (isWinner) {
                     announceWinner(winner);
-                    //Toast.makeText(this,"The "+ winner +"s Win!", Toast.LENGTH_LONG).show();
                     for (int i = 0; i < buttons.length; i++) {
                         for (int j = 0; j < buttons[i].length; j++) {
                             buttons[i][j].setClickable(false);

@@ -49,12 +49,11 @@
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="40dp"
         android:text="@string/playerCPU"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.267"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playerTwoName"
+        app:layout_constraintTop_toBottomOf="@+id/txtOptions"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Button
@@ -95,20 +94,32 @@
         android:id="@+id/boardx4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="40dp"
         android:text="Board X4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch1" />
+        app:layout_constraintTop_toBottomOf="@+id/txtOptions" />
 
     <Switch
         android:id="@+id/boardx5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="28dp"
         android:text="Board X5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerTwoName" />
+
+    <TextView
+        android:id="@+id/txtOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:textSize="18dp"
+        android:text="@string/txtOptions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boardx4" />
+        app:layout_constraintTop_toBottomOf="@+id/playerTwoName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
